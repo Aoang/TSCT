@@ -21,7 +21,7 @@ func Webhook(urls string) {
 	})
 }
 
-func Handler(w http.ResponseWriter, r *http.Request) {
+func Handler(r *http.Request) {
 	bytes, _ := ioutil.ReadAll(r.Body)
 	var update tg.Update
 	_ = json.Unmarshal(bytes, &update)

@@ -29,20 +29,19 @@ func Load(c *Config) {
 	Bot(config.BotToken)
 
 	if config.WebhookURL != "" {
-		// 不推荐使用这个设置 Webhook
+		// 不推荐使用这里的功能来配置 Webhook
 		Webhook(config.WebhookURL)
 	}
 }
 
 func GetEnv() *Config {
 	c := &Config{
-		BotToken:   os.Getenv("key"),
-		WebhookURL: os.Getenv("key"),
-		QQSecret:   os.Getenv("key"),
+		BotToken:   os.Getenv("BOT_TOKEN"),
+		WebhookURL: os.Getenv("WEBHOOK_URL"),
+		QQSecret:   os.Getenv("QQ_SECRET"),
 	}
-	c.TelegramID, _ = strconv.ParseInt(os.Getenv("key"), 10, 64)
-
-	if c.TelegramID == 0 || c.QQSecret == "" || c.BotToken == "" {
+	c.TelegramID, _ = strconv.ParseInt(os.Getenv("TELEGRAM_ID"), 10, 64)
+	if c.BotToken == "" {
 		return nil
 	}
 	return c

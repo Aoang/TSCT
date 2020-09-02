@@ -2,6 +2,7 @@ package main
 
 import (
 	tsct "github.com/Aoang/TSCT"
+	"github.com/Aoang/TSCT/api"
 	"net/http"
 )
 
@@ -12,6 +13,6 @@ func main() {
 		QQSecret:   "",
 	})
 
-	http.HandleFunc("/api", tsct.Handler)
+	http.HandleFunc("/api", api.Handler)
 	_ = http.ListenAndServe("127.0.0.1:8443", nil)
 }

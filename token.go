@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type Data struct {
+type data struct {
 	ID             int64
 	Secret         string
 	Time           *time.Time
@@ -16,16 +16,16 @@ type Data struct {
 	wg             sync.WaitGroup
 }
 
-var m = make(map[int64]*Data)
+var m = make(map[int64]*data)
 
 func LoadSecret(id int64, secret string) {
-	m[id] = &Data{
+	m[id] = &data{
 		ID:     id,
 		Secret: secret,
 	}
 }
 
-func Find(id int64) *Data {
+func Find(id int64) *data {
 	d, ok := m[id]
 	if !ok {
 		return nil
@@ -33,53 +33,32 @@ func Find(id int64) *Data {
 	return d
 }
 
-func (d *Data) GET() *Data {
+func (d *data) GET() *data {
 	d.Time = getTime()
 
 	d.wg.Add(3)
-	go d.Old()
-	go d.Now()
-	go d.Next()
+	go d.oldCode()
+	go d.nowCode()
+	go d.nextCode()
 	return d
 }
 
-func (d *Data) Old() {
-	d.old = d.gen(-30 * time.Second)
+func (d *data) oldCode() {
+	d.old = Token(d.Secret, d.Time.Add(-30*time.Second))
 	d.wg.Done()
 }
 
-func (d *Data) Now() {
-	d.now = d.gen(0)
+func (d *data) nowCode() {
+	d.now = Token(d.Secret, d.Time.Add(0))
 	d.wg.Done()
 }
 
-func (d *Data) Next() {
-	d.next = d.gen(30 * time.Second)
+func (d *data) nextCode() {
+	d.next = Token(d.Secret, d.Time.Add(30*time.Second))
 	d.wg.Done()
 }
 
-func (d *Data) gen(t time.Duration) (code string) {
-	i := strconv.Itoa(gens(d.Secret, d.Time.Add(t)))
-	switch len(i) {
-	case 0:
-		code = "000000"
-	case 1:
-		code = "00000" + i
-	case 2:
-		code = "0000" + i
-	case 3:
-		code = "000" + i
-	case 4:
-		code = "00" + i
-	case 5:
-		code = "0" + i
-	default:
-		code = i
-	}
-	return
-}
-
-func (d *Data) String() string {
+func (d *data) String() string {
 	d.wg.Wait()
 	return `_` + d.Time.Format("2006/01/02 15:04:05 MST") + `_
 
@@ -87,7 +66,7 @@ func (d *Data) String() string {
 		"`" + d.now + "`" + `  \|  ` + "`" + d.next + "`"
 }
 
-func gens(secret string, t time.Time) int {
+func Token(secret string, t time.Time) string {
 	ss, _ := hex.DecodeString(secret)
 	b := sha256.Sum256(append(ss, times(t)...))
 
@@ -109,7 +88,24 @@ func gens(secret string, t time.Time) int {
 		t += d[i+1+8*7]
 		c = c*10 + int(t%10)
 	}
-	return c
+	return zeroPadding(c)
+}
+
+func zeroPadding(i int) string {
+	s := strconv.Itoa(i)
+	switch len(s) {
+	case 1:
+		s = "00000" + s
+	case 2:
+		s = "0000" + s
+	case 3:
+		s = "000" + s
+	case 4:
+		s = "00" + s
+	case 5:
+		s = "0" + s
+	}
+	return s
 }
 
 func times(t time.Time) []byte {
