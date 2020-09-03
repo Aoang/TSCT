@@ -41,6 +41,11 @@ OTOP 算法一般来说都是通用的，因为都是遵循 [RFC6238](https://to
 
 ### 部署
 
+给 Telegram Bot 设置 Webhook
+
+可以直接修改 `cmd/webhook/main.go` 中的配置然后运行一次即可
+
+
 ##### 源码部署
 ！！！ 使用这种部署方式之前先将仓库转为私有库
 
