@@ -1,23 +1,5 @@
 # QQ 安全中心动态密钥 (Tencent QQ Security Center Token)
 
-不得不说，有现成的技术方案不用，非要跑去魔改一个，真是国内众多大厂的特征。
-
-整的没办法迁入 Bitwarden，只能玩骚操作来曲线救国。
-
-提取密钥，放入 Vercel 的 Serverless 监听 Telegram。
-
-这样使用的时候只需要给自己的机器人发条消息就好了。
-
-### 前言
-
-现有的 One Time Password 方案大多分为 HOTP 和 OTOP，前者基于事件，后者基于时间。
-
-在两步验证的安全策略中，大多数都是采用基于时间的 OTOP 算法。
-
-OTOP 算法一般来说都是通用的，因为都是遵循 [RFC6238](https://tools.ietf.org/html/rfc6238) 来实现的。
-
-而 QQ 安全中心的算法是魔改 RFC6238 实现的，导致除开它自己的客户端，其他的 OTOP 客户端都没办法用。
-
 ### 提取 Secret
 1. Android 手机
 2. 系统已经 Root
@@ -37,7 +19,7 @@ OTOP 算法一般来说都是通用的，因为都是遵循 [RFC6238](https://to
 2. 使用 Vercel 账号导入 fork 过去的仓库
 3. 使用 Telegram 账号获取自己账户的 ID
 4. 申请一个 Telegram Bot 拿到 Token
-5. 可选，给 Vercel 绑定一个域名
+5. 给 Vercel 绑定一个域名
 
 ### 部署
 
