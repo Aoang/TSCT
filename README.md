@@ -25,8 +25,11 @@
 
 给 Telegram Bot 设置 Webhook
 
-可以直接修改 `cmd/webhook/main.go` 中的配置然后运行一次即可
+可以直接修改 `cmd/webhook/main.go` 中的配置然后运行一次即可。
 
+设定的 Webhook URL 应该为自定义域名+文件名。
+
+例，绑定的域名是 `aoang.eu.org`，文件名是 `tsct.go`，Webhook URL 为`https://aoang.eu.org/api/tsct`
 
 ##### 源码部署
 ！！！ 使用这种部署方式之前先将仓库转为私有库
@@ -50,6 +53,8 @@ WEBHOOK_URL=
 QQ_SECRET=
 TELEGRAM_ID=
 ```
+
+
 
 
 ### 使用方法
@@ -84,25 +89,6 @@ func main() {
 
 ### TODO
 - 多 SECRET 支持
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
