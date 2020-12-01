@@ -1,4 +1,6 @@
 # QQ 安全中心动态密钥 (Tencent QQ Security Center Token)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAoang%2FTSCT.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAoang%2FTSCT?ref=badge_shield)
+
 
 ### 提取 Secret
 1. Android 手机
@@ -92,3 +94,7 @@ func main() {
 
 
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAoang%2FTSCT.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAoang%2FTSCT?ref=badge_large)
