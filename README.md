@@ -31,10 +31,12 @@
 
 例，绑定的域名是 `aoang.eu.org`，文件名是 `tsct.go`，Webhook URL 为`https://aoang.eu.org/api/tsct`
 
+在 Vercel 面板导入 git 库，部署目录选择 vercel。
+
 ##### 源码部署
 ！！！ 使用这种部署方式之前先将仓库转为私有库
 
-更改 `api/tsct.go` 文件内的配置信息，例如
+更改 `vercel/api/tsct.go` 文件内的配置信息，例如
 ```go
 const (
 	BotToken   = "123456789:abcdefgh"
