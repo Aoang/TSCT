@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	tsct "github.com/Aoang/TSCT"
-	"github.com/Aoang/TSCT/handler"
+	"github.com/Aoang/TSCT/api"
 )
 
 func main() {
