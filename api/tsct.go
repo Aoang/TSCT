@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	tsct "github.com/Aoang/TSCT"
+	t "github.com/Aoang/TSCT"
 )
 
 // -------------------------------- //
@@ -18,18 +18,18 @@ const (
 // -------------------------------- //
 
 func init() {
-	e := tsct.GetEnv()
+	e := t.GetEnv()
 	if e == nil {
-		e = &tsct.Config{
+		e = &t.Config{
 			BotToken:   BotToken,
 			TelegramID: TelegramID,
 			QQSecret:   QQSecret,
 		}
 	}
 
-	tsct.Load(e)
+	t.Load(e)
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	tsct.Handler(r)
+	t.Handler(r)
 }
