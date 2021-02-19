@@ -2,10 +2,11 @@ package tsct
 
 import (
 	"encoding/json"
-	tg "github.com/go-telegram-bot-api/telegram-bot-api"
 	"io/ioutil"
 	"net/http"
 	"net/url"
+
+	tg "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 var api *tg.BotAPI
